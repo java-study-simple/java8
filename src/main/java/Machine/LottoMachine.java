@@ -17,11 +17,18 @@ public class LottoMachine {
 
     public LottoMachine(){
 
+        price = 1000;
+        maxNum = 45;
+        lottoNumbers = new ArrayList<>(45);
+        for(int i=0; i< maxNum; i++){
+            lottoNumbers.set(i, i+1);
+        }
+
     }
 
     public void shuffleLotto(){
 
-
+        Collections.shuffle(lottoNumbers);
 
     }
 
