@@ -5,6 +5,6 @@ public class Main {
 
     public static void main(String[] args) {
         FlowController flowController = new LottoFlowController();
-        flowController.Run();;
+        flowController.run();
     }
 }

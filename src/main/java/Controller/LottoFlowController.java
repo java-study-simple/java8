@@ -18,6 +18,8 @@ public class LottoFlowController implements FlowController {
     }
     @Override
     public void run() {
+         resultView.showLottoTicket(lottoMachine.buyLotto(inputView.getInt("구입금액을 입력해 주세요.")), lottoMachine.getLottMax());
+
 
     }
 }
