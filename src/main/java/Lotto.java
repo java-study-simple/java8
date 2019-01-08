@@ -1,9 +1,14 @@
 import java.util.ArrayList;
+import java.util.List;
 
 public class Lotto {
 
-    private ArrayList<Integer> lotto = new ArrayList<Integer>();
+    private List<Integer> lotto;
 
-    public ArrayList<Integer> getLotto() { return this.lotto; }
-    public void setLotto(ArrayList<Integer> lotto) { this.lotto = lotto; }
+    public List<Integer> getLotto() { return this.lotto; }
+
+    public Lotto(List<Integer> lotto) {
+        this.lotto = lotto;
+    }
+
 }

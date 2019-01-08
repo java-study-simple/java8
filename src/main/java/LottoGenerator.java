@@ -1,22 +1,27 @@
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Random;
+import java.util.List;
 
 public class LottoGenerator {
-    private ArrayList<Integer> lotto = new ArrayList<Integer>();
-    private ArrayList<Integer> generateLotto = new ArrayList<Integer>();
 
-    private void setLottoNumber() {
-        for(int i=1;i<=45;i++) {
+    private List<Integer> lotto = new ArrayList<Integer>();
+    private List<Integer> generateLotto = new ArrayList<Integer>();
+
+    public static final int lottoMaxNumber = 45;
+    public static final int lottoMaxSizeNum = 6;
+
+    public LottoGenerator() {
+
+        for(int i=1;i<=lottoMaxNumber;i++) {
             lotto.add(i);
         }
     }
 
-    public ArrayList<Integer> generate() {
-        setLottoNumber();
+
+    public List<Integer> generate() {
         Collections.shuffle(lotto);
 
-        for(int i=0;i<6;i++) {
+        for(int i=0;i<lottoMaxSizeNum;i++) {
             generateLotto.add(lotto.get(i));
         }
 
