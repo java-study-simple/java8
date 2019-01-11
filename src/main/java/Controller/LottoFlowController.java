@@ -4,7 +4,7 @@ import Machine.LottoMachine;
 import View.InputView;
 import View.ResultView;
 
-public class LottoFlowController implements FlowController {
+public class LottoFlowController{
 
     private InputView inputView;
     private ResultView resultView;
@@ -16,10 +16,7 @@ public class LottoFlowController implements FlowController {
         lottoMachine = new LottoMachine();
 
     }
-    @Override
     public void run() {
-         resultView.showLottoTicket(lottoMachine.buyLotto(inputView.getInt("구입금액을 입력해 주세요.")), lottoMachine.getLottMax());
-
-
+         resultView.showLottoTicket(lottoMachine.buyLotto(inputView.getMoney()));
     }
 }

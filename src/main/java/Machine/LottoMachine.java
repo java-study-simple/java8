@@ -1,36 +1,40 @@
 package Machine;
 
 
-import View.InputView;
-import View.ResultView;
+import Data.Lotto;
+import Data.LottoNumber;
 
 import java.util.*;
 
 public class LottoMachine {
 
-    private int price;
-    private int maxNum;
-    private int lottoMax;
+    static final int price = 1000;
+    static final int maxNumber = 45;
+    static final int lottoCount = 6;
     private List<Integer> lottoNumbers;
+    private List<Lotto> result;
 
-    public int getLottMax(){return lottoMax;}
+    public int getLottoCount(){return lottoCount;}
 
     public LottoMachine(){
 
-        price = 1000;
-        maxNum = 45;
-        lottoMax = 6;
-
         lottoNumbers = new ArrayList<>();
-        for(int i=1; i< maxNum+1; i++){
+
+        for(int i=1; i< maxNumber+1; i++){
             lottoNumbers.add(i);
         }
 
     }
 
-    public List<List<Integer>> buyLotto(int money){
+    public List<Lotto> buyLotto(int money){
+
+        if(Objects.isNull(money) || money <0){
+            throw new IllegalArgumentException();
+        }
+
         int count = money / price;
-        List<List<Integer>> result = new LinkedList<>();
+
+        result = new ArrayList<>();
 
         for(int i=0; i< count; i++){
             result.add(shuffleLotto());
@@ -39,18 +43,17 @@ public class LottoMachine {
         return result;
     }
 
-    private List<Integer> shuffleLotto(){
+    private Lotto shuffleLotto(){
 
-        List<Integer> list = new LinkedList<>();
+        Lotto lotto = new Lotto();
 
         Collections.shuffle(lottoNumbers);
 
-        for(int i=0; i< lottoMax; i++){
-            list.add(lottoNumbers.get(i));
+        for(int i=0; i<lottoCount; i++){
+            lotto.addLottoNumber(new LottoNumber<>(lottoNumbers.get(i)));
         }
-        Collections.sort(list);
-        return list;
 
+        return lotto;
     }
 
     public void calculateMoney(){

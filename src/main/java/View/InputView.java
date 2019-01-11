@@ -10,15 +10,15 @@ public class InputView{
         sc = new Scanner(System.in);
     }
 
-    public int getInt(String sentence){
-        System.out.println(sentence);
+    public int getMoney(){
+        System.out.println("구입 금액을 입력해 주세요.");
         return sc.nextInt();
     }
 
-    public int[] getIntArray(String sentence, int length){
-        int[] arr = new int[length];
-        System.out.println(sentence);
-        for(int i=0; i<length; i++){
+    public int[] getHitLottoNumber(){
+        int[] arr = new int[6];
+        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+        for(int i=0; i<6; i++){
             arr[i] = sc.nextInt();
         }
 
