@@ -1,8 +1,11 @@
 package Controller;
 
+import Data.Lotto;
 import Machine.LottoMachine;
 import View.InputView;
 import View.ResultView;
+
+import java.util.List;
 
 public class LottoFlowController{
 
@@ -17,6 +20,10 @@ public class LottoFlowController{
 
     }
     public void run() {
-         resultView.showLottoTicket(lottoMachine.buyLotto(inputView.getMoney()));
+
+        List<Lotto> lottoList = lottoMachine.buyLotto(inputView.getMoney());
+
+        resultView.showLottoTicket(lottoList);
+        resultView.showHitLottoPercent(lottoMachine.calculateHitMoney(lottoList, inputView.getHitLotto()));
     }
 }

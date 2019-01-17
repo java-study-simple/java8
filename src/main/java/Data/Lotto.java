@@ -1,7 +1,6 @@
 package Data;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.stream.Collectors;
 
 public class Lotto {
@@ -33,5 +32,13 @@ public class Lotto {
         stringBuilder.append("]");
 
         return stringBuilder.toString();
+    }
+
+    public int getMatchHitCount(Lotto lotto){
+        return (int) lottoNumbers.stream().filter(lotto::contaions).count();
+    }
+
+    private boolean contaions(LottoNumber lottoNumber){
+        return lottoNumbers.contains(lottoNumber);
     }
 }

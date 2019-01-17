@@ -2,19 +2,18 @@ package Machine;
 
 
 import Data.Lotto;
+import Data.LottoHit;
+import Data.LottoHitPapper;
 import Data.LottoNumber;
 
 import java.util.*;
 
 public class LottoMachine {
 
-    static final int price = 1000;
-    static final int maxNumber = 45;
-    static final int lottoCount = 6;
+    public static final int price = 1000;
+    public static final int maxNumber = 45;
+    public static final int lottoCount = 6;
     private List<Integer> lottoNumbers;
-    private List<Lotto> result;
-
-    public int getLottoCount(){return lottoCount;}
 
     public LottoMachine(){
 
@@ -34,8 +33,7 @@ public class LottoMachine {
 
         int count = money / price;
 
-        result = new ArrayList<>();
-
+        List<Lotto> result = new ArrayList<>();
         for(int i=0; i< count; i++){
             result.add(shuffleLotto());
         }
@@ -49,14 +47,21 @@ public class LottoMachine {
 
         Collections.shuffle(lottoNumbers);
 
-        for(int i=0; i<lottoCount; i++){
-            lotto.addLottoNumber(new LottoNumber<>(lottoNumbers.get(i)));
-        }
+        lottoNumbers.stream()
+                .limit(lottoCount)
+                .forEach(i -> lotto.addLottoNumber(new LottoNumber<>(i)));
 
         return lotto;
     }
 
-    public void calculateMoney(){
+
+    public LottoHitPapper calculateHitMoney(List<Lotto> lottoList, Lotto hitLotto){
+        LottoHitPapper lottoHitPapper = new LottoHitPapper();
+        lottoList.stream().forEach(lotto -> {
+            lottoHitPapper.addLottoHitCount(LottoHit.valueOf(lotto.getMatchHitCount(hitLotto)));
+        });
+
+        return lottoHitPapper;
 
     }
 

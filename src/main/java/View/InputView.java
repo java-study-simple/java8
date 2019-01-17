@@ -1,5 +1,9 @@
 package View;
 
+import Data.Lotto;
+import Data.LottoNumber;
+
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class InputView{
@@ -15,14 +19,19 @@ public class InputView{
         return sc.nextInt();
     }
 
-    public int[] getHitLottoNumber(){
-        int[] arr = new int[6];
+    public Lotto getHitLotto(){
+        sc.nextLine();
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        for(int i=0; i<6; i++){
-            arr[i] = sc.nextInt();
-        }
+        String getNum = sc.nextLine();
+        String[] tmp = getNum.split(", |,| ");
 
-        return arr;
+        Lotto lotto = new Lotto();
+        Arrays.stream(tmp).mapToInt(Integer::parseInt)
+                .forEach(i -> {
+                    lotto.addLottoNumber(new LottoNumber<>(i));
+                });
+
+        return lotto;
     }
 
 
