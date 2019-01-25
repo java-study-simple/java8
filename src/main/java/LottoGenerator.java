@@ -2,32 +2,39 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+
 public class LottoGenerator {
 
-    private List<Integer> lotto = new ArrayList<Integer>();
-    private List<Integer> generateLotto = new ArrayList<Integer>();
+    private List<Integer> lottoNumList = new ArrayList<>();
+    private List<Lotto> generateLottos = new ArrayList<>();
 
     public static final int lottoMaxNumber = 45;
-    public static final int lottoMaxSizeNum = 6;
 
     public LottoGenerator() {
 
         for(int i=1;i<=lottoMaxNumber;i++) {
-            lotto.add(i);
+            lottoNumList.add(i);
         }
     }
 
+    public List<Lotto> generate(int money) {
+        Lotto lotto;
+        int lottoCount = money/Lotto.price;
+        for(int i=0;i<lottoCount;i++) {
+            List<Integer> generateLotto = new ArrayList<Integer>();
 
-    public List<Integer> generate() {
-        Collections.shuffle(lotto);
+            Collections.shuffle(lottoNumList);
 
-        for(int i=0;i<lottoMaxSizeNum;i++) {
-            generateLotto.add(lotto.get(i));
+            for(int j = 0; j< Lotto.lottoMaxSizeNum; j++) {
+                generateLotto.add(lottoNumList.get(j));
+            }
+
+            Collections.sort(generateLotto);
+            lotto = new Lotto(generateLotto);
+            generateLottos.add(lotto);
         }
 
-        Collections.sort(generateLotto);
-
-        return generateLotto;
+        return generateLottos;
     }
 
 }

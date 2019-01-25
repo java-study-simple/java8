@@ -1,54 +1,31 @@
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class InputView {
-    private int buyingLottoAmount;
-    private int buyingLottoNum;
-    private ArrayList<Lotto> buyingLottoList = new ArrayList<Lotto>();
 
-    public void setBuyingLottoAmount() {
+    private Scanner scanner;
+
+    public InputView() {
+        scanner = new Scanner(System.in);
+    }
+
+    public int inputMoney() {
         System.out.println("구입금액을 입력해 주세요.");
-        Scanner scanner = new Scanner(System.in);
-        this.buyingLottoAmount = scanner.nextInt();
-        setBuyingLottoNum(this.buyingLottoAmount);
+        int money = scanner.nextInt();
+        return money;
     }
-    public int getBuyingLottoAmount() { return buyingLottoAmount; }
 
-    public int getBuyingLottoNum() { return buyingLottoNum; }
-
-    public void setBuyingLottoList(int lottoNum) {
-        for(int i=0;i<lottoNum;i++) {
-            Lotto lotto = new Lotto();
-            lotto.setLotto(new LottoGenerator().generate());
-            buyingLottoList.add(lotto);
+    public Lotto inputWinLotto() {
+        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+        List<Integer> lotto = new ArrayList<>();
+        for(int i = 0; i< Lotto.lottoMaxSizeNum; i++) {
+            int num = scanner.nextInt();
+            lotto.add(num);
         }
+
+        Lotto winLotto = new Lotto(lotto);
+        return winLotto;
     }
 
-    public ArrayList<Lotto> getBuyingLottoList() {
-        return buyingLottoList;
-    }
-
-    private void setBuyingLottoNum(int amount) {
-        buyingLottoNum = amount/1000;
-    }
-
-
-    public void printBuyingLottoNum() {
-        buyingLottoNum = getBuyingLottoNum();
-        System.out.println(buyingLottoNum+"개를 구매했습니다.");
-        setBuyingLottoList(buyingLottoNum);
-    }
-
-    public void printBuyingLottoList() {
-        for(int i=0;i<buyingLottoList.size();i++) {
-            System.out.print("[");
-            for(int j=0;j<buyingLottoList.get(i).getLotto().size();j++) {
-                System.out.print(buyingLottoList.get(i).getLotto().get(j));
-                if(j!=buyingLottoList.get(i).getLotto().size()-1){
-                    System.out.print(", ");
-                }
-            }
-            System.out.println("]");
-        }
-    }
 }
